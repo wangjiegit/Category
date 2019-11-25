@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  Category
+//
+//  Created by wangjie on 2019/11/25.
+//  Copyright © 2019 wangjie. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "WJAPPMacro.h"
+#import "WJUICategory.h"
+#import "WJNSCategory.h"
+
+#endif /* PrefixHeader_pch */
