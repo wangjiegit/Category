@@ -9,6 +9,7 @@
 #import "WJNSCategory.h"
 #import <objc/runtime.h>
 #import <CommonCrypto/CommonDigest.h>
+#import <Photos/Photos.h>
 
 #pragma mark NSArray
 
@@ -185,6 +186,73 @@
 + (void)wj_invocationEvent:(NSTimer *)timer {
     void(^block)(NSTimer *timer) = timer.userInfo;
     if (block) block(timer);
+}
+
+@end
+
+#pragma mark NSData
+@implementation NSData (WJPlugin)
+
++ (NSData *)dataWithCompressImage:(UIImage *)image maxKBLength:(CGFloat)maxKBLength {
+    if (!image) return nil;
+    CGFloat compression = 1;
+    CGFloat maxLength = maxKBLength * 1000;
+    NSData *compressionData = UIImageJPEGRepresentation(image, compression);
+    if (compressionData.length < maxLength) return compressionData;
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        compressionData = UIImageJPEGRepresentation(image, compression);
+        if (compressionData.length < maxLength * 0.9) {
+            min = compression;
+        } else if (compressionData.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    if (compressionData.length < maxLength) return compressionData;
+    UIImage *resultImage = [UIImage imageWithData:compressionData];
+    NSUInteger lastDataLength = 0;
+    while (compressionData.length > maxLength && compressionData.length != lastDataLength) {
+        lastDataLength = compressionData.length;
+        CGFloat ratio = (CGFloat)maxLength / compressionData.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)),
+                                 (NSUInteger)(resultImage.size.height * sqrtf(ratio))); // Use NSUInteger to prevent white blank
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        compressionData = UIImageJPEGRepresentation(resultImage, compression);
+    }
+    return compressionData;
+}
+
++ (void)videoToMP4ByURL:(NSURL *)URL startSeconds:(CGFloat)startSeconds endSeconds:(CGFloat)endSeconds completion:(void(^)(NSData *data))comepleteBlock {
+    if (!URL || endSeconds <= startSeconds || startSeconds < 0) {
+        if (comepleteBlock) comepleteBlock(nil);
+        return;
+    }
+    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:URL options:nil];
+    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+    NSString *presetName = AVAssetExportPresetLowQuality;
+    if ([compatiblePresets containsObject:AVAssetExportPresetMediumQuality]) presetName = AVAssetExportPresetMediumQuality;
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:presetName];
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *uniqueName = [NSString stringWithFormat:@"%@.mp4",[formatter stringFromDate:date]];
+    NSString *resultPath = [NSTemporaryDirectory() stringByAppendingPathComponent:uniqueName];
+    exportSession.outputURL = [NSURL fileURLWithPath:resultPath];
+    exportSession.outputFileType = AVFileTypeMPEG4;//可以配置多种输出文件格式
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    exportSession.timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(startSeconds, 600), CMTimeMakeWithSeconds(endSeconds, 600));
+    [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (comepleteBlock) comepleteBlock([NSData dataWithContentsOfFile:resultPath]);
+        });
+    }];
 }
 
 @end

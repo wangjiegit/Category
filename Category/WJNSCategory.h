@@ -60,5 +60,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#pragma mark NSData
+@interface NSData (WJPlugin)
 
+/// 压缩图片
+/// @param image 要压缩的图片
+/// @param maxKBLength  单位kb
++ (NSData *)dataWithCompressImage:(UIImage *)image maxKBLength:(CGFloat)maxKBLength;
+
+
+/// 本地视频转MP4
+/// @param URL 视频本地地址
+/// @param startSeconds 截取视频从第几秒开始
+/// @param endSeconds  截取视频从第几秒结束
++ (void)videoToMP4ByURL:(NSURL *)URL startSeconds:(CGFloat)startSeconds endSeconds:(CGFloat)endSeconds completion:(void(^)(NSData *data))comepleteBlock;
+
+@end
 NS_ASSUME_NONNULL_END
