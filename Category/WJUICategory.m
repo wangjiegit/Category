@@ -332,19 +332,6 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector) {
 
 @end
 
-#pragma mark UIScrollView
-@implementation UIScrollView (WJPlugin)
-
-- (void)setWj_recognizeSimultaneously:(BOOL)wj_recognizeSimultaneously {
-    objc_setAssociatedObject(self, @selector(wj_recognizeSimultaneously), @(wj_recognizeSimultaneously), OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (BOOL)wj_recognizeSimultaneously {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-
-@end
-
 #pragma mark UITextField
 @implementation UITextField (WJPlugin)
 

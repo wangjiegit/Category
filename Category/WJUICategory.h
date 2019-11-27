@@ -78,13 +78,6 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector);
 
 @end
 
-#pragma mark UIScrollView
-@interface UIScrollView (WJPlugin)
-
-@property (nonatomic) BOOL wj_recognizeSimultaneously;//同时识别滑动
-
-@end
-
 #pragma mark UITextField
 @interface UITextField (WJPlugin)
 
