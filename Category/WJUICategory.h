@@ -21,16 +21,16 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector);
 #pragma mark UIView
 @interface UIView (WJPlugin)
 //frame
-@property (nonatomic) CGFloat wj_left;
-@property (nonatomic) CGFloat wj_top;
-@property (nonatomic) CGFloat wj_right;
-@property (nonatomic) CGFloat wj_bottom;
-@property (nonatomic) CGFloat wj_width;
-@property (nonatomic) CGFloat wj_height;
-@property (nonatomic) CGFloat wj_centerX;
-@property (nonatomic) CGFloat wj_centerY;
-@property (nonatomic) CGPoint wj_origin;
-@property (nonatomic) CGSize  wj_size;
+@property (nonatomic) CGFloat left;
+@property (nonatomic) CGFloat top;
+@property (nonatomic) CGFloat right;
+@property (nonatomic) CGFloat bottom;
+@property (nonatomic) CGFloat width;
+@property (nonatomic) CGFloat height;
+@property (nonatomic) CGFloat centerX;
+@property (nonatomic) CGFloat centerY;
+@property (nonatomic) CGPoint origin;
+@property (nonatomic) CGSize size;
 
 //渐变
 @property (nonatomic, copy) NSArray *wj_gradientColors;
@@ -38,7 +38,7 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector);
 @property (nonatomic) CGPoint wj_gradientEndPoint;
 
 /**<删除所有子视图*/
-- (void)wj_removeAllSubviews;
+- (void)removeAllSubviews;
 
 /**点击事件*/
 - (void)wj_setTapActionWithBlock:(void (^)(UIView *view))block;
@@ -59,7 +59,7 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector);
 #pragma mark UIButton
 @interface UIButton (WJPlugin)
 //设置背景颜色
-- (void)wj_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
 
 @end
 
