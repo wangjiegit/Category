@@ -10,6 +10,9 @@
 		A0024405238BB650007CDC30 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0024404238BB650007CDC30 /* BlockViewController.m */; };
 		A07AF0DF2386C06C00C3A3AC /* WJUICategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AF0DE2386C06C00C3A3AC /* WJUICategory.m */; };
 		A07AF0E22386C1A800C3A3AC /* WJNSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AF0E12386C1A800C3A3AC /* WJNSCategory.m */; };
+		A0D88C26238E25FF0035A8D8 /* WJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D88C24238E25FF0035A8D8 /* WJProgressHUD.m */; };
+		A0D88C29238E26070035A8D8 /* loading_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0D88C27238E26070035A8D8 /* loading_icon@3x.png */; };
+		A0D88C2A238E26070035A8D8 /* loading_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0D88C28238E26070035A8D8 /* loading_icon@2x.png */; };
 		A0FC5E8823869CCA00419AC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FC5E8723869CCA00419AC4 /* AppDelegate.m */; };
 		A0FC5E8E23869CCA00419AC4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FC5E8D23869CCA00419AC4 /* ViewController.m */; };
 		A0FC5E9123869CCA00419AC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0FC5E8F23869CCA00419AC4 /* Main.storyboard */; };
@@ -27,6 +30,10 @@
 		A07AF0E02386C1A800C3A3AC /* WJNSCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJNSCategory.h; sourceTree = "<group>"; };
 		A07AF0E12386C1A800C3A3AC /* WJNSCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WJNSCategory.m; sourceTree = "<group>"; };
 		A0AD15C52387AC8E00C8FEE4 /* WJAPPMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WJAPPMacro.h; sourceTree = "<group>"; };
+		A0D88C24238E25FF0035A8D8 /* WJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJProgressHUD.m; sourceTree = "<group>"; };
+		A0D88C25238E25FF0035A8D8 /* WJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJProgressHUD.h; sourceTree = "<group>"; };
+		A0D88C27238E26070035A8D8 /* loading_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading_icon@3x.png"; sourceTree = "<group>"; };
+		A0D88C28238E26070035A8D8 /* loading_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading_icon@2x.png"; sourceTree = "<group>"; };
 		A0FC5E8323869CCA00419AC4 /* Category.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Category.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0FC5E8623869CCA00419AC4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A0FC5E8723869CCA00419AC4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,6 +88,10 @@
 				A07AF0DE2386C06C00C3A3AC /* WJUICategory.m */,
 				A07AF0E02386C1A800C3A3AC /* WJNSCategory.h */,
 				A07AF0E12386C1A800C3A3AC /* WJNSCategory.m */,
+				A0D88C25238E25FF0035A8D8 /* WJProgressHUD.h */,
+				A0D88C24238E25FF0035A8D8 /* WJProgressHUD.m */,
+				A0D88C28238E26070035A8D8 /* loading_icon@2x.png */,
+				A0D88C27238E26070035A8D8 /* loading_icon@3x.png */,
 				A0FC5E8F23869CCA00419AC4 /* Main.storyboard */,
 				A0FC5E9223869CCC00419AC4 /* Assets.xcassets */,
 				A0FC5E9423869CCC00419AC4 /* LaunchScreen.storyboard */,
@@ -150,6 +161,8 @@
 				A0FC5E9623869CCC00419AC4 /* LaunchScreen.storyboard in Resources */,
 				A0FC5E9323869CCC00419AC4 /* Assets.xcassets in Resources */,
 				A0FC5E9123869CCA00419AC4 /* Main.storyboard in Resources */,
+				A0D88C2A238E26070035A8D8 /* loading_icon@2x.png in Resources */,
+				A0D88C29238E26070035A8D8 /* loading_icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +177,7 @@
 				A0FC5E8E23869CCA00419AC4 /* ViewController.m in Sources */,
 				A0FC5E8823869CCA00419AC4 /* AppDelegate.m in Sources */,
 				A0FC5E9923869CCC00419AC4 /* main.m in Sources */,
+				A0D88C26238E25FF0035A8D8 /* WJProgressHUD.m in Sources */,
 				A07AF0E22386C1A800C3A3AC /* WJNSCategory.m in Sources */,
 				A07AF0DF2386C06C00C3A3AC /* WJUICategory.m in Sources */,
 			);

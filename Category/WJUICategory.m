@@ -325,7 +325,7 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector) {
                 UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
                 [impactLight impactOccurred];
             }
-//            [WJProgressHUD showTextHud:@"复制成功" inView:[UIApplication sharedApplication].keyWindow];
+            [WJProgressHUD showTextHud:@"复制成功" inView:[UIApplication sharedApplication].keyWindow];
         }
     }
 }
