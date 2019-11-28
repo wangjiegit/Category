@@ -171,6 +171,12 @@
     return string;
 }
 
+- (NSString *)filterPhoneNumSpecialSign {
+    NSString *string = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"\\p{Cf}" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, string.length)];
+    return string;
+}
+
 @end
 
 #pragma mark NSTimer

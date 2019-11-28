@@ -51,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 邮政编码
 - (BOOL)wj_isZipcode;
 
+//过滤掉复制来的手机号码中的特殊符号
+- (NSString *)filterPhoneNumSpecialSign;
+
 @end
 
 #pragma mark NSTimer

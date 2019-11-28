@@ -6,8 +6,9 @@
 //  Copyright © 2019 wangjie. All rights reserved.
 //
 
-#import "WJProgressHUD.h"
+#import <UIKit/UIKit.h>
 #import <objc/runtime.h>
+#import "WJProgressHUD.h"
 
 @interface WJHUD : UIView
 
@@ -55,12 +56,8 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGSize size = [_messageLabel sizeThatFits:CGSizeMake(self.frame.size.width - 70, CGFLOAT_MAX)];
-    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:CGRectMake(([UIScreen mainScreen].bounds.size.width - size.width - 30) / 2, ([UIScreen mainScreen].bounds.size.height - size.height - 20) / 2, size.width + 30, size.height + 20) toView:self];
-    _bgView.frame = CGRectMake((self.frame.size.width - size.width - 30) / 2, rect.origin.y, rect.size.width, rect.size.height);
-    _messageLabel.frame = CGRectMake(15, 10, rect.size.width - 30, rect.size.height - 20);
-    size = _gifView.image.size;
-    rect = [[UIApplication sharedApplication].keyWindow convertRect:CGRectMake(([UIScreen mainScreen].bounds.size.width - size.width) / 2, ([UIScreen mainScreen].bounds.size.height - size.height) / 2, size.width, size.height) toView:self];
+    CGSize size = _gifView.image.size;
+    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:CGRectMake(([UIScreen mainScreen].bounds.size.width - size.width) / 2, ([UIScreen mainScreen].bounds.size.height - size.height) / 2, size.width, size.height) toView:self];
     _gifView.frame = CGRectMake((self.frame.size.width - size.width) / 2, rect.origin.y, rect.size.width, rect.size.height);
 }
 
@@ -70,15 +67,20 @@
     _gifView.hidden = YES;
     _bgView.hidden = NO;
     _messageLabel.text = text;
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    animation.duration = 0.1;
-    animation.fromValue = @(0.3);
-    animation.toValue = @(1.0);
-    [_bgView.layer addAnimation:animation forKey:nil];
+    [self bgViewSizeToFit];
+    _bgView.transform = CGAffineTransformMakeScale(.5f, .5f);
     self.hidden = NO;
+    [UIView animateWithDuration:0.3 delay:0. usingSpringWithDamping:1.f initialSpringVelocity:0.f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        self.bgView.transform = CGAffineTransformMakeScale(1.f, 1.f);
+    } completion:nil];
     [self performSelector:@selector(removeHUD) withObject:nil afterDelay:1 inModes:@[NSRunLoopCommonModes]];
+}
+
+- (void)bgViewSizeToFit {
+    CGSize size = [_messageLabel sizeThatFits:CGSizeMake(self.frame.size.width - 70, CGFLOAT_MAX)];
+    CGRect rect = [[UIApplication sharedApplication].keyWindow convertRect:CGRectMake(([UIScreen mainScreen].bounds.size.width - size.width - 30) / 2, ([UIScreen mainScreen].bounds.size.height - size.height - 20) / 2, size.width + 30, size.height + 20) toView:self];
+    _bgView.frame = CGRectMake((self.frame.size.width - size.width - 30) / 2, rect.origin.y, rect.size.width, rect.size.height);
+    _messageLabel.frame = CGRectMake(15, 10, rect.size.width - 30, rect.size.height - 20);
 }
 
 - (void)removeHUD {
