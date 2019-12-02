@@ -99,6 +99,7 @@ void swizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector);
 @interface UIColor (WJPlugin)
 + (nullable UIColor *)wj_colorWithHexString:(NSString *)hexStr;
 + (nullable UIColor *)wj_colorWithHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
++ (nullable UIColor *)colorTransformFrom:(UIColor*)fromColor to:(UIColor *)toColor progress:(CGFloat)progress;
 @end;
 
 NS_ASSUME_NONNULL_END
